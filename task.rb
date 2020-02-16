@@ -81,11 +81,7 @@ def q10
 
   # 以下に回答を記載
   foods.each do |food|
-    if food.include?("うに")
-      puts "好物です"
-    else
-      puts "まぁまぁ好きです"
-    end
+  puts food.include?("うに") ? "好物です" : "まぁまぁ好きです"
   end
 end
 
@@ -139,11 +135,28 @@ def q16
   ]
 
   # 以下に回答を記載
-
+    users.each do |user|
+    puts "私の名前は#{user[:name]}です。年齢は#{user[:age]}歳です。"
+  end
 end
 
 class UserQ17
   # 以下に回答を記載
+  def initialize(user)
+    @name = user[:name]
+    @age = user[:age]
+    @gender = user[:gender]
+    @admin = user[:admin] ? "有り" : "無し"
+  end
+
+  def info
+    puts <<~EOS
+    名前:#{@name}
+    年齢:#{@age}
+    性別:#{@gender}
+    管理者権限:#{@admin}
+    EOS
+  end
 
 end
 
@@ -159,6 +172,18 @@ end
 
 class UserQ18
   # 以下に回答を記載
+  def initialize(user)
+    @name = user[:name]
+    @age = user[:age]
+  end
+
+  def introduce
+    if @age >= 20
+      "こんにちは,#{@name}と申します。よろしくお願いします。"
+    else
+      "はいさいまいど〜,#{@name}です!!!"
+    end
+  end
 
 end
 
@@ -173,8 +198,9 @@ end
 
 class Item
   # 以下を修正して下さい
+  attr_reader :name
 
-  def initialize(name)
+  def initialize(name:)
     @name = name
   end
 end
@@ -187,12 +213,38 @@ end
 
 class UserQ20
   # 以下に回答を記載
+  attr_reader :name, :age
 
+  def initialize(user)
+    @name = user[:name]
+    @age = user[:age]
+  end
 end
 
 class Zoo
   # 以下に回答を記載
+  def initialize(zoo)
+    @name = zoo[:name]
+    @infant = zoo[:entry_fee][:infant]
+    @children = zoo[:entry_fee][:children]
+    @adult = zoo[:entry_fee][:adult]
+    @senior = zoo[:entry_fee][:senior]
+  end
 
+  def info_entry_fee(user)
+    fee =
+    case user.age
+      when 0..5
+        @infant
+      when 6..12
+        @children
+      when 13..64
+        @adult
+      when 65..120
+        @senior
+    end
+    puts "#{user.name}さんの入場料金は#{fee}円です。"
+  end
 end
 
 
