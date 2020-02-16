@@ -142,19 +142,20 @@ end
 
 class UserQ17
   # 以下に回答を記載
-  def initialize(user)
+  def initialize(**user)
     @name = user[:name]
     @age = user[:age]
     @gender = user[:gender]
-    @admin = user[:admin] ? "有り" : "無し"
+    @admin = user[:admin]
   end
 
   def info
+    admin = @admin ? "有り" : "無し"
     puts <<~EOS
     名前:#{@name}
     年齢:#{@age}
     性別:#{@gender}
-    管理者権限:#{@admin}
+    管理者権限:#{admin}
     EOS
   end
 
@@ -172,7 +173,7 @@ end
 
 class UserQ18
   # 以下に回答を記載
-  def initialize(user)
+  def initialize(**user)
     @name = user[:name]
     @age = user[:age]
   end
@@ -215,7 +216,7 @@ class UserQ20
   # 以下に回答を記載
   attr_reader :name, :age
 
-  def initialize(user)
+  def initialize(**user)
     @name = user[:name]
     @age = user[:age]
   end
@@ -223,7 +224,7 @@ end
 
 class Zoo
   # 以下に回答を記載
-  def initialize(zoo)
+  def initialize(**zoo)
     @name = zoo[:name]
     @infant = zoo[:entry_fee][:infant]
     @children = zoo[:entry_fee][:children]
